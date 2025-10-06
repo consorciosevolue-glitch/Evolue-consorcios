@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Evolue Consórcios - Simulação</title>
+  <style>
+    :root {
+      --bg: #000;
+      --text: #fff;
+      --accent: #FFD700;
+    }
+    * {
+      box-sizing: border-box;
+      font-family: 'Inter', system-ui, sans-serif;
+    }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h1 {
+      color: var(--accent);
+    }
+    .container {
+      max-width: 600px;
+      width: 100%;
+      background: #111;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+    }
+    .tabs {
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 20px;
+    }
+    .tab {
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      background: #222;
+    }
+    .tab.active {
+      background: var(--accent);
+      color: #000;
+      font-weight: 600;
+    }
+    input[type=range] {
+      width: 100%;
+      margin: 10px 0;
+      accent-color: var(--accent);
+    }
+    select, button {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      margin: 8px 0;
+      font-size: 16px;
+    }
+    select {
+      background: #222;
+      color: #fff;
+    }
+    button {
+      background: var(--accent);
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .result {
+      text-align: center;
+      margin-top: 20px;
+      font-size: 20px;
+      color: var(--accent);
+    }
+    footer {
+      margin-top: 40px;
+      font-size: 13px;
+      color: #aaa;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Evolue Consórcios</h1>
+  <div class="container">
+    <div class="tabs">
+      <div class="tab active" id="autoTab">🚗 Automóvel</div>
+      <div class="tab" id="imovelTab">🏠 Imóvel</div>
+    </div>
+
+    <label>Valor do crédito: R$ <span id="valorDisplay">10000</span></label>
+    <input type="range" id="valorRange" min="10000" max="200000" step="10000" value="10000">
+
+    <label>Número de parcelas:</label>
+    <select id="parcelasSelect"></select>
+
+    <div class="result">Parcela estimada: <strong id="parcelaValor">R$ 0,00</strong></div>
+
+    <button id="whatsBtn">💬 Enviar simulação por WhatsApp</button>
+  </div>
+
+  <footer>
+    Evolue Consórcios • Avenida Brasil, 5577 — Cascavel/PR<br>
+    📧 consorciosevolue@gmail.com • 📱 (45) 9 9848-6848 | (45) 9 8814-8563 | (45) 9 8822-1883
+  </footer>
+
+  <script>
+    const tabelaAuto = {
+      10000: {60: 280}, 20000: {60: 560}, 30000: {60: 840},
+      40000: {60: 1120}, 50000: {60: 1400}, 100000: {60: 2800},
+      150000: {60: 4200}, 200000: {60: 5600}
+    };
+    const tabelaImovel = {
+      50000: {120: 620}, 100000: {120: 1240}, 200000: {120: 2480},
+      300000: {120: 3720}, 400000: {120: 4960}, 500000: {120: 6200},
+      600000: {120: 7440}
+    };
+
+    const valorRange = document.getElementById('valorRange');
+    const valorDisplay = document.getElementById('valorDisplay');
+    const parcelaValor = document.getElementById('parcelaValor');
+    const parcelasSelect = document.getElementById('parcelasSelect');
+    const autoTab = document.getElementById('autoTab');
+    const imovelTab = document.getElementById('imovelTab');
+    const whatsBtn = document.getElementById('whatsBtn');
+
+    let tipo = 'auto';
+    let tabela = tabelaAuto;
+
+    function atualizarParcelas() {
+      parcelasSelect.innerHTML = '';
+      const valores = tabela[parseInt(valorRange.value)];
+      for (const p in valores) {
+        const opt = document.createElement('option');
+        opt.value = p;
+        opt.textContent = p + 'x';
+        parcelasSelect.appendChild(opt);
+      }
+    }
+
+    function atualizarValor() {
+      valorDisplay.textContent = parseInt(valorRange.value).toLocaleString('pt-BR');
+      const valor = parseInt(valorRange.value);
+      const parcelas = parcelasSelect.value;
+      const valParc = tabela[valor]?.[parcelas] || 0;
+      parcelaValor.textContent = 'R$ ' + valParc.toLocaleString('pt-BR', {minimumFractionDigits:2});
+    }
+
+    valorRange.addEventListener('input', () => { atualizarParcelas(); atualizarValor(); });
+    parcelasSelect.addEventListener('change', atualizarValor);
+
+    autoTab.addEventListener('click', () => {
+      tipo = 'auto'; tabela = tabelaAuto;
+      autoTab.classList.add('active'); imovelTab.classList.remove('active');
+      valorRange.min = 10000; valorRange.max = 200000; valorRange.step = 10000; valorRange.value = 10000;
+      atualizarParcelas(); atualizarValor();
+    });
+
+    imovelTab.addEventListener('click', () => {
+      tipo = 'imovel'; tabela = tabelaImovel;
+      autoTab.classList.remove('active'); imovelTab.classList.add('active');
+      valorRange.min = 50000; valorRange.max = 600000; valorRange.step = 50000; valorRange.value = 50000;
+      atualizarParcelas(); atualizarValor();
+    });
+
+    whatsBtn.addEventListener('click', () => {
+      const valor = valorRange.value;
+      const parcelas = parcelasSelect.value;
+      const msg = encodeURIComponent(`Olá! Gostaria de simular um consórcio ${tipo === 'auto' ? 'de automóvel' : 'imobiliário'} no valor de R$ ${parseInt(valor).toLocaleString('pt-BR')} em ${parcelas}x.`);
+      const nums = ['554598486848','5545988148563','5545988221883'];
+      const links = nums.map(n => `https://wa.me/${n}?text=${msg}`);
+      alert('Escolha um número para enviar sua simulação:\n1️⃣ '+links[0]+'\n2️⃣ '+links[1]+'\n3️⃣ '+links[2]);
+    });
+
+    atualizarParcelas(); atualizarValor();
+  </script>
+</body>
+</html>
