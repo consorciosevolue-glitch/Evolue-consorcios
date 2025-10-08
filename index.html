@@ -5,9 +5,6 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Evolue Consórcios</title>
 
-<!-- ==============================
-     CSS GERAL - INICIO
-================================ -->
 <style>
 :root { --bg:#000; --text:#fff; --accent:#d4af37; --accent-dark:#b68b2a; }
 * { box-sizing:border-box; font-family:'Inter', system-ui, sans-serif; }
@@ -40,9 +37,6 @@ footer { margin-top:40px; font-size:13px; color:#aaa; text-align:center; padding
 .portfolio { max-width:600px; width:90%; margin-top:40px; text-align:center; }
 .portfolio-box { background:#111; margin:15px 0; border-radius:12px; box-shadow:0 0 15px rgba(212,175,55,0.15); display:flex; justify-content:center; align-items:center; color:#555; font-size:16px; padding:10px; }
 
-/* ===============================
-   CSS TITULOS ANIMADOS
-================================ */
 .highlight-title, .top-title-gradient {
   font-size: 2rem;
   font-weight: 700;
@@ -55,137 +49,36 @@ footer { margin-top:40px; font-size:13px; color:#aaa; text-align:center; padding
   margin-top: 20px;
 }
 
-.top-title-gradient {
-  font-size: 2.5rem;
-}
+.top-title-gradient { font-size: 2.5rem; }
 
 @keyframes shine {
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
 }
+
+/* CARROSSEL */
+#carousel-box { position: relative; width:100%; padding-top:100%; overflow:hidden; }
+.carousel-container { position:absolute; top:0; left:0; width:100%; height:100%; overflow:hidden; }
+.carousel-track { display:flex; height:100%; cursor:grab; transition:transform 0.3s ease; }
+.carousel-track.grabbing { cursor:grabbing; }
+.carousel-slide { min-width:100%; height:100%; object-fit:cover; user-select:none; }
+.carousel-indicators { display:flex; justify-content:center; align-items:center; margin-top:15px; gap:8px; position:relative; }
+.carousel-indicators span { display:block; width:10px; height:10px; background:rgba(212,175,55,0.3); border-radius:50%; transition:0.3s; cursor:pointer; }
+.carousel-indicators span.active { background:var(--accent); }
+.video-gallery { display:flex; justify-content:center; align-items:flex-start; gap:10px; flex-wrap:wrap; background:#111; border-radius:12px; padding:10px; box-shadow:0 0 15px rgba(212,175,55,0.15); }
+.video-item { width:30%; aspect-ratio:9/16; overflow:hidden; border-radius:12px; position:relative; background:#000; }
+.video-item video { width:100%; height:100%; object-fit:cover; display:block; border-radius:12px; }
+@media (max-width:768px){ .video-item{ width:90%; } }
 </style>
-<!-- ==============================
-     CSS GERAL - FIM
-================================ -->
-
-<!-- ==============================
-     CSS CARROSSEL - INICIO
-================================ -->
-<style>
-#carousel-box { 
-  position: relative; 
-  width:100%; 
-  padding-top:100%; 
-  overflow:hidden; 
-}
-
-.carousel-container { 
-  position:absolute; 
-  top:0; 
-  left:0; 
-  width:100%; 
-  height:100%; 
-  overflow:hidden; 
-}
-
-.carousel-track { 
-  display:flex; 
-  height:100%; 
-  cursor:grab; 
-  transition:transform 0.3s ease; 
-}
-
-.carousel-track.grabbing { 
-  cursor:grabbing; 
-}
-
-.carousel-slide { 
-  min-width:100%; 
-  height:100%; 
-  object-fit:cover; 
-  user-select:none; 
-}
-
-/* Pontinhos do carrossel */
-.carousel-indicators { 
-  display:flex; 
-  justify-content:center; 
-  align-items:center;
-  margin-top:15px;  
-  gap:8px; 
-  position:relative; 
-}
-
-.carousel-indicators span { 
-  display:block; 
-  width:10px; 
-  height:10px; 
-  background:rgba(212,175,55,0.3); 
-  border-radius:50%; 
-  transition:0.3s; 
-  cursor:pointer; 
-}
-
-.carousel-indicators span.active { 
-  background:var(--accent); 
-}
-
-/* Video gallery */
-.video-gallery {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 10px;
-  flex-wrap: wrap;
-  background: #111;
-  border-radius: 12px;
-  padding: 10px;
-  box-shadow: 0 0 15px rgba(212,175,55,0.15);
-}
-
-.video-item {
-  width: 30%;
-  aspect-ratio: 9 / 16; 
-  overflow: hidden;
-  border-radius: 12px;
-  position: relative;
-  background: #000;
-}
-
-.video-item video {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-  border-radius: 12px;
-}
-
-@media (max-width: 768px) {
-  .video-item { width: 90%; }
-}
-</style>
-<!-- ==============================
-     CSS CARROSSEL - FIM
-================================ -->
-
 </head>
 <body>
 
-<!-- ==============================
-     HEADER
-================================ -->
 <header>
   <img src="logo-evolue.png" alt="Evolue Consórcios Logo">
 </header>
 
-<!-- ==============================
-     TITULO PRINCIPAL
-================================ -->
 <h1 class="top-title-gradient">Faça sua cotação</h1>
 
-<!-- ==============================
-     SIMULADOR
-================================ -->
 <div class="container">
   <div class="tabs">
     <div class="tab active" id="autoTab">🚗 Automóvel</div>
@@ -203,9 +96,6 @@ footer { margin-top:40px; font-size:13px; color:#aaa; text-align:center; padding
   <button id="whatsBtn">💬 Simular no WhatsApp</button>
 </div>
 
-<!-- ==============================
-     PORTFOLIO / CARROSSEL
-================================ -->
 <div class="portfolio">
 <h2 class="highlight-title">Conheça a Evolue e inspire-se a evoluir</h2>
 <div class="portfolio-box video-gallery">
@@ -225,6 +115,7 @@ footer { margin-top:40px; font-size:13px; color:#aaa; text-align:center; padding
     </video>
   </div>
 </div>
+
 <div class="portfolio-box" id="carousel-box">
   <div class="carousel-container">
     <div class="carousel-track" id="carousel-track"></div>
@@ -233,27 +124,15 @@ footer { margin-top:40px; font-size:13px; color:#aaa; text-align:center; padding
 <div class="carousel-indicators" id="carousel-indicators"></div>
 </div>
 
-<!-- ==============================
-     SLIDE DO SLOGAN - FINAL
-================================ -->
 <h1 class="highlight-title" style="margin-top:40px; font-size:1.5rem;">Muito mais que uma escolha, uma evolução financeira</h1>
 
-<!-- ==============================
-     FOOTER
-================================ -->
 <footer>
   Evolue Consórcios • Avenida Brasil, 5577 — Cascavel/PR<br>
   📧 consorciosevolue@gmail.com
 </footer>
 
-<!-- ==============================
-     BOTAO FLUTUANTE
-================================ -->
 <a class="floating-btn" href="https://linktr.ee/evolueconsorcios" target="_blank">🔗</a>
 
-<!-- ==============================
-     JS SIMULADOR + CARROSSEL
-================================ -->
 <script>
 // --- SIMULADOR ---
 const tabelaAuto={10000:{60:280},20000:{60:560},30000:{60:840},40000:{60:1120},50000:{60:1400},100000:{60:2800},150000:{60:4200},200000:{60:5600}};
@@ -306,5 +185,74 @@ whatsBtn.addEventListener('click',()=>{
 });
 
 atualizarParcelas(); atualizarValor();
+
+// --- CARROSSEL ---
+const carouselTrack = document.getElementById('carousel-track');
+const carouselIndicators = document.getElementById('carousel-indicators');
+const carouselImages = ['1.jpg','2.jpg','3.jpg','4.jpg','5.jpg','6.jpg'];
+let index = 1;
+let startX = 0, currentX = 0, dragging = false;
+
+function setupCarousel(){
+  carouselTrack.innerHTML = '';
+  carouselIndicators.innerHTML = '';
+
+  const lastClone = document.createElement('img');
+  lastClone.src = carouselImages[carouselImages.length - 1];
+  lastClone.className = 'carousel-slide';
+  carouselTrack.appendChild(lastClone);
+
+  carouselImages.forEach((src, i) => {
+    const slide = document.createElement('img');
+    slide.src = src;
+    slide.className = 'carousel-slide';
+    carouselTrack.appendChild(slide);
+
+    const dot = document.createElement('span');
+    dot.addEventListener('click', () => gotoSlide(i + 1));
+    carouselIndicators.appendChild(dot);
+  });
+
+  const firstClone = document.createElement('img');
+  firstClone.src = carouselImages[0];
+  firstClone.className = 'carousel-slide';
+  carouselTrack.appendChild(firstClone);
+
+  carouselTrack.style.transform = `translateX(-${index * 100}%)`;
+  updateIndicators();
+}
+
+function updateIndicators(){
+  const dots = carouselIndicators.children;
+  let visibleIndex = index - 1;
+  if(index === 0) visibleIndex = carouselImages.length - 1;
+  if(index === carouselImages.length + 1) visibleIndex = 0;
+  Array.from(dots).forEach((dot,i)=>dot.classList.toggle('active', i === visibleIndex));
+}
+
+function gotoSlide(i){ index=i; carouselTrack.style.transition='transform 0.3s ease'; carouselTrack.style.transform=`translateX(-${index*100}%)`; updateIndicators(); }
+
+function startDrag(x){ dragging=true; startX=x; carouselTrack.classList.add('grabbing'); carouselTrack.style.transition='none'; }
+function moveDrag(x){ if(!dragging) return; currentX=x-startX; carouselTrack.style.transform=`translateX(-${index*100 - (currentX/carouselTrack.clientWidth)*100}%)`; }
+function endDrag(){ if(!dragging) return; dragging=false; carouselTrack.classList.remove('grabbing'); if(currentX < -carouselTrack.clientWidth/4) index++; else if(currentX > carouselTrack.clientWidth/4) index--; currentX=0; carouselTrack.style.transition='transform 0.3s ease'; carouselTrack.style.transform=`translateX(-${index*100}%)`; }
+
+document.addEventListener('mousemove', e=>moveDrag(e.clientX));
+document.addEventListener('mouseup', endDrag);
+document.addEventListener('touchmove', e=>{ moveDrag(e.touches[0].clientX); e.preventDefault(); });
+document.addEventListener('touchend', endDrag);
+
+carouselTrack.addEventListener('mousedown', e=>startDrag(e.clientX));
+carouselTrack.addEventListener('touchstart', e=>startDrag(e.touches[0].clientX));
+
+carouselTrack.addEventListener('transitionend', ()=>{
+  if(index===0){ index=carouselImages.length; carouselTrack.style.transition='none'; carouselTrack.style.transform=`translateX(-${index*100}%)`; }
+  if(index===carouselImages.length+1){ index=1; carouselTrack.style.transition='none'; carouselTrack.style.transform=`translateX(-${index*100}%)`; }
+  updateIndicators();
+});
+
+window.addEventListener('resize', ()=>carouselTrack.style.transform=`translateX(-${index*100}%)`);
+setupCarousel();
 </script>
-<!-- Carrossel permanece igual ao anterior -->
+
+</body>
+</html>
