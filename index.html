@@ -201,13 +201,62 @@
     <div class="result">Parcela estimada: <strong id="parcelaValor">R$ 0,00</strong></div>
 
     <button id="whatsBtn">💬 Simular no WhatsApp</button>
-  </div>
-
   <div class="portfolio">
-    <h2 style="color: var(--accent);">Portfólio Evolue</h2>
-    <div class="portfolio-box">Espaço reservado para vídeos</div>
-    <div class="portfolio-box">Espaço reservado para carrosséis</div>
+  <h2 style="color: var(--accent);">Portfólio Evolue</h2>
+
+  <div class="portfolio-box">Espaço reservado para vídeos</div>
+
+  <div class="portfolio-box" id="carousel-box">
+    <div class="carousel-container">
+      <button class="carousel-btn prev">&#10094;</button>
+      <div class="carousel-track">
+        <img src="files/1.jpg" class="carousel-slide" alt="1">
+        <img src="files/2.jpg" class="carousel-slide" alt="2">
+        <img src="files/3.jpg" class="carousel-slide" alt="3">
+        <img src="files/4.jpg" class="carousel-slide" alt="4">
+        <img src="files/5.jpg" class="carousel-slide" alt="5">
+        <img src="files/6.jpg" class="carousel-slide" alt="6">
+      </div>
+      <button class="carousel-btn next">&#10095;</button>
+    </div>
   </div>
+</div>
+
+<style>
+#carousel-box {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  height: 300px; /* Ajuste conforme a altura da moldura */
+}
+
+.carousel-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-track {
+  display: flex;
+  transition: transform 0.5s ease;
+  height: 100%;
+}
+
+.carousel-slide {
+  min-width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(0,0,0,0.4);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: po
 
   <footer>
     Evolue Consórcios • Avenida Brasil, 5577 — Cascavel/PR<br>
