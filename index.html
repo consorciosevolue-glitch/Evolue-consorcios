@@ -257,10 +257,16 @@ function setupCarousel(){
 // ------------------------------
 function updateIndicators(){
   const dots = carouselIndicators.children;
-  const i = (index-1 + carouselImages.length) % carouselImages.length;
-  Array.from(dots).forEach((d,j)=>d.classList.toggle('active', j===i));
-}
+  let visibleIndex = index - 1;
 
+  // Corrige índices por causa dos clones
+  if (index === 0) visibleIndex = carouselImages.length - 1;
+  if (index === carouselImages.length + 1) visibleIndex = 0;
+
+  Array.from(dots).forEach((dot, i) => {
+    dot.classList.toggle('active', i === visibleIndex);
+  });
+}
 // ------------------------------
  // FUNÇÃO PARA IR PARA SLIDE ESPECÍFICO
 // ------------------------------
