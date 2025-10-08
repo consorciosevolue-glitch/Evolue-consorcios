@@ -41,9 +41,8 @@ footer { margin-top:40px; font-size:13px; color:#aaa; text-align:center; padding
 .carousel-container { position:absolute; top:0; left:0; width:100%; height:100%; overflow:hidden; }
 .carousel-track { display:flex; height:100%; cursor:grab; transition:transform 0.3s ease; }
 .carousel-track.grabbing { cursor:grabbing; }
-.carousel-slide { min-width:100%; height:100%; object-fit:cover; user-select:none; pointer-events:none; }
+.carousel-slide { min-width:100%; height:100%; object-fit:cover; user-select:none; }
 
-/* Indicadores */
 .carousel-indicators { display:flex; justify-content:center; margin-top:10px; gap:6px; position:relative; }
 .carousel-indicators span { display:block; width:10px; height:10px; background:rgba(212,175,55,0.3); border-radius:50%; transition:0.3s; cursor:pointer; }
 .carousel-indicators span.active { background:var(--accent); }
@@ -80,18 +79,11 @@ footer { margin-top:40px; font-size:13px; color:#aaa; text-align:center; padding
 <div class="portfolio-box" id="carousel-box">
 <div class="carousel-container">
 <div class="carousel-track" id="carousel-track">
-<img src="6.jpg" class="carousel-slide" alt="Imagem 6 clone">
-<img src="1.jpg" class="carousel-slide" alt="Imagem 1">
-<img src="2.jpg" class="carousel-slide" alt="Imagem 2">
-<img src="3.jpg" class="carousel-slide" alt="Imagem 3">
-<img src="4.jpg" class="carousel-slide" alt="Imagem 4">
-<img src="5.jpg" class="carousel-slide" alt="Imagem 5">
-<img src="6.jpg" class="carousel-slide" alt="Imagem 6">
-<img src="1.jpg" class="carousel-slide" alt="Imagem 1 clone">
+<!-- Clones serão adicionados dinamicamente pelo JS -->
 </div>
 </div>
 <div class="carousel-indicators" id="carousel-indicators">
-<span class="active"></span><span></span><span></span><span></span><span></span><span></span>
+<!-- Pontinhos serão gerados pelo JS -->
 </div>
 </div>
 </div>
@@ -133,48 +125,82 @@ whatsBtn.addEventListener('click',()=>{ const valor=parseInt(valorRange.value).t
 
 atualizarParcelas(); atualizarValor();
 
-// CARROSSEL CONTÍNUO PREMIUM
+// --- CARROSSEL FUNCIONAL ---
 const track = document.getElementById('carousel-track');
-let slides = Array.from(track.children);
-const indicators = document.querySelectorAll('.carousel-indicators span');
+const indicatorsContainer = document.getElementById('carousel-indicators');
+const images = ['1.jpg','2.jpg','3.jpg','4.jpg','5.jpg','6.jpg'];
 
-let index = 1, startX = 0, currentX = 0, dragging = false;
+// Gerar slides + clones para loop
+function setupCarousel(){
+  track.innerHTML='';
+  indicatorsContainer.innerHTML='';
+  const slides = [];
 
-track.style.transform = `translateX(-${index*100}%)`;
+  // clone último
+  let lastClone = document.createElement('img');
+  lastClone.src = images[images.length-1];
+  lastClone.className='carousel-slide';
+  track.appendChild(lastClone);
 
-function updateIndicators(){
-  let i = (index-1 + indicators.length) % indicators.length;
-  indicators.forEach((dot,d)=>dot.classList.toggle('active', d===i));
+  // slides originais
+  images.forEach((img, i)=>{
+    let slide = document.createElement('img');
+    slide.src=img;
+    slide.className='carousel-slide';
+    track.appendChild(slide);
+
+    // indicador
+    let dot = document.createElement('span');
+    if(i===0) dot.classList.add('active');
+    dot.addEventListener('click', ()=>gotoSlide(i+1));
+    indicatorsContainer.appendChild(dot);
+  });
+
+  // clone primeiro
+  let firstClone = document.createElement('img');
+  firstClone.src = images[0];
+  firstClone.className='carousel-slide';
+  track.appendChild(firstClone);
+
+  return track.children;
 }
 
-// Pontinhos clicáveis
-indicators.forEach((dot,i)=>{
-  dot.addEventListener('click', ()=>{
-    index = i+1;
-    track.style.transition='transform 0.3s ease';
-    track.style.transform = `translateX(-${index*100}%)`;
-    updateIndicators();
-  });
-});
+let slides = setupCarousel();
+let index = 1;
+track.style.transform = `translateX(-${index*100}%)`;
 
-// Drag / touch contínuo
+let startX=0, currentX=0, dragging=false;
+
+function updateIndicators(){
+  let dots = indicatorsContainer.children;
+  let i = (index-1 + images.length)%images.length;
+  Array.from(dots).forEach((d,j)=>d.classList.toggle('active',j===i));
+}
+
+function gotoSlide(i){
+  index=i;
+  track.style.transition='transform 0.3s ease';
+  track.style.transform = `translateX(-${index*100}%)`;
+  updateIndicators();
+}
+
+// Drag/Touch
 function startDrag(x){ dragging=true; startX=x; track.classList.add('grabbing'); track.style.transition='none'; }
 function moveDrag(x){ if(!dragging) return; currentX=x-startX; track.style.transform=`translateX(-${index*100 - (currentX/track.clientWidth)*100}%)`; }
 function endDrag(){
   if(!dragging) return;
   dragging=false; track.classList.remove('grabbing');
-  const threshold = track.clientWidth / 4;
-  if(currentX < -threshold) index++;
-  else if(currentX > threshold) index--;
+  if(currentX < -track.clientWidth/4) index++;
+  else if(currentX > track.clientWidth/4) index--;
   currentX=0;
   track.style.transition='transform 0.3s ease';
-  track.style.transform = `translateX(-${index*100}%)`;
+  track.style.transform=`translateX(-${index*100}%)`;
 }
 
-// Loop infinito suave
+// Loop infinito
 track.addEventListener('transitionend', ()=>{
-  if(index === 0){ index = slides.length-2; track.style.transition='none'; track.style.transform = `translateX(-${index*100}%)`; }
-  else if(index === slides.length-1){ index = 1; track.style.transition='none'; track.style.transform = `translateX(-${index*100}%)`; }
+  if(index===0){ index=images.length; track.style.transition='none'; track.style.transform=`translateX(-${index*100}%)`; }
+  if(index===images.length+1){ index=1; track.style.transition='none'; track.style.transform=`translateX(-${index*100}%)`; }
   updateIndicators();
 });
 
@@ -188,8 +214,6 @@ track.addEventListener('touchmove', e=>moveDrag(e.touches[0].clientX));
 track.addEventListener('touchend', endDrag);
 
 window.addEventListener('resize', ()=>track.style.transform = `translateX(-${index*100}%)`);
-
-updateIndicators();
 </script>
 </body>
 </html>
