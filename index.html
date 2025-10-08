@@ -4,6 +4,10 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Evolue Consórcios</title>
+
+<!-- ==============================
+     CSS GERAL - INICIO
+================================ -->
 <style>
 :root { --bg:#000; --text:#fff; --accent:#d4af37; --accent-dark:#b68b2a; }
 * { box-sizing:border-box; font-family:'Inter', system-ui, sans-serif; }
@@ -35,8 +39,15 @@ footer { margin-top:40px; font-size:13px; color:#aaa; text-align:center; padding
 
 .portfolio { max-width:600px; width:90%; margin-top:40px; text-align:center; }
 .portfolio-box { background:#111; height:200px; margin:15px 0; border-radius:12px; box-shadow:0 0 15px rgba(212,175,55,0.15); display:flex; justify-content:center; align-items:center; color:#555; font-size:16px; }
+</style>
+<!-- ==============================
+     CSS GERAL - FIM
+================================ -->
 
-/* CARROSSEL */
+<!-- ==============================
+     CSS CARROSSEL - INICIO
+================================ -->
+<style>
 #carousel-box { position: relative; width:100%; padding-top:100%; overflow:hidden; }
 .carousel-container { position:absolute; top:0; left:0; width:100%; height:100%; overflow:hidden; }
 .carousel-track { display:flex; height:100%; cursor:grab; transition:transform 0.3s ease; }
@@ -47,57 +58,102 @@ footer { margin-top:40px; font-size:13px; color:#aaa; text-align:center; padding
 .carousel-indicators span { display:block; width:10px; height:10px; background:rgba(212,175,55,0.3); border-radius:50%; transition:0.3s; cursor:pointer; }
 .carousel-indicators span.active { background:var(--accent); }
 </style>
+<!-- ==============================
+     CSS CARROSSEL - FIM
+================================ -->
+
 </head>
 <body>
+
+<!-- ==============================
+     HEADER - INICIO
+================================ -->
 <header>
-<img src="logo-evolue.png" alt="Evolue Consórcios Logo">
+  <img src="logo-evolue.png" alt="Evolue Consórcios Logo">
 </header>
+<!-- ==============================
+     HEADER - FIM
+================================ -->
 
+<!-- ==============================
+     TITULO PRINCIPAL - INICIO
+================================ -->
 <h1>Muito mais que uma escolha, uma evolução financeira</h1>
+<!-- ==============================
+     TITULO PRINCIPAL - FIM
+================================ -->
 
+<!-- ==============================
+     SIMULADOR - INICIO
+================================ -->
 <div class="container">
-<div class="tabs">
-<div class="tab active" id="autoTab">🚗 Automóvel</div>
-<div class="tab" id="imovelTab">🏠 Imóvel</div>
-<div class="tab" id="investTab">💼 Investimento</div>
-</div>
-
-<label>Valor do crédito: R$ <span id="valorDisplay">10000</span></label>
-<input type="range" id="valorRange" min="10000" max="200000" step="10000" value="10000">
-
-<label>Número de parcelas:</label>
-<select id="parcelasSelect"></select>
-
-<div class="result">Parcela estimada: <strong id="parcelaValor">R$ 0,00</strong></div>
-<button id="whatsBtn">💬 Simular no WhatsApp</button>
-</div>
-
-<div class="portfolio">
-<h2 style="color: var(--accent);">Portfólio Evolue</h2>
-<div class="portfolio-box">Espaço reservado para vídeos</div>
-
-<!-- CARROSSEL -->
-<div class="portfolio-box" id="carousel-box">
-  <div class="carousel-container">
-    <div class="carousel-track" id="carousel-track"></div>
+  <div class="tabs">
+    <div class="tab active" id="autoTab">🚗 Automóvel</div>
+    <div class="tab" id="imovelTab">🏠 Imóvel</div>
+    <div class="tab" id="investTab">💼 Investimento</div>
   </div>
-  <div class="carousel-indicators" id="carousel-indicators"></div>
-</div>
-</div>
 
+  <label>Valor do crédito: R$ <span id="valorDisplay">10000</span></label>
+  <input type="range" id="valorRange" min="10000" max="200000" step="10000" value="10000">
+
+  <label>Número de parcelas:</label>
+  <select id="parcelasSelect"></select>
+
+  <div class="result">Parcela estimada: <strong id="parcelaValor">R$ 0,00</strong></div>
+  <button id="whatsBtn">💬 Simular no WhatsApp</button>
+</div>
+<!-- ==============================
+     SIMULADOR - FIM
+================================ -->
+
+<!-- ==============================
+     PORTFOLIO / CARROSSEL - INICIO
+================================ -->
+<div class="portfolio">
+  <h2 style="color: var(--accent);">Portfólio Evolue</h2>
+  <div class="portfolio-box">Espaço reservado para vídeos</div>
+
+  <!-- CARROSSEL -->
+  <div class="portfolio-box" id="carousel-box">
+    <div class="carousel-container">
+      <div class="carousel-track" id="carousel-track"></div>
+    </div>
+    <div class="carousel-indicators" id="carousel-indicators"></div>
+  </div>
+</div>
+<!-- ==============================
+     PORTFOLIO / CARROSSEL - FIM
+================================ -->
+
+<!-- ==============================
+     FOOTER - INICIO
+================================ -->
 <footer>
-Evolue Consórcios • Avenida Brasil, 5577 — Cascavel/PR<br>
-📧 consorciosevolue@gmail.com
+  Evolue Consórcios • Avenida Brasil, 5577 — Cascavel/PR<br>
+  📧 consorciosevolue@gmail.com
 </footer>
+<!-- ==============================
+     FOOTER - FIM
+================================ -->
 
+<!-- ==============================
+     BOTAO FLUTUANTE - INICIO
+================================ -->
 <a class="floating-btn" href="https://linktr.ee/evolueconsorcios" target="_blank">🔗</a>
+<!-- ==============================
+     BOTAO FLUTUANTE - FIM
+================================ -->
 
+<!-- ==============================
+     JS SIMULADOR - INICIO
+================================ -->
 <script>
-// SIMULADOR
+// TABELAS DE SIMULADOR
 const tabelaAuto={10000:{60:280},20000:{60:560},30000:{60:840},40000:{60:1120},50000:{60:1400},100000:{60:2800},150000:{60:4200},200000:{60:5600}};
 const tabelaImovel={50000:{120:620},100000:{120:1240},200000:{120:2480},300000:{120:3720},400000:{120:4960},500000:{120:6200},600000:{120:7440}};
 const tabelaInvest={10000:{60:250},20000:{60:500},50000:{60:1250},100000:{60:2500},150000:{60:3750},200000:{60:5000}};
 
+// ELEMENTOS
 const valorRange=document.getElementById('valorRange');
 const valorDisplay=document.getElementById('valorDisplay');
 const parcelaValor=document.getElementById('parcelaValor');
@@ -109,8 +165,26 @@ const whatsBtn=document.getElementById('whatsBtn');
 
 let tipo='auto', tabela=tabelaAuto;
 
-function atualizarParcelas(){ parcelasSelect.innerHTML=''; const valores=tabela[parseInt(valorRange.value)]; for(const p in valores){ const opt=document.createElement('option'); opt.value=p; opt.textContent=p+'x'; parcelasSelect.appendChild(opt); } }
-function atualizarValor(){ valorDisplay.textContent=parseInt(valorRange.value).toLocaleString('pt-BR'); const valor=parseInt(valorRange.value); const parcelas=parcelasSelect.value; const valParc=tabela[valor]?.[parcelas]||0; parcelaValor.textContent='R$ '+valParc.toLocaleString('pt-BR',{minimumFractionDigits:2}); }
+// FUNÇÕES
+function atualizarParcelas(){ 
+  parcelasSelect.innerHTML=''; 
+  const valores=tabela[parseInt(valorRange.value)]; 
+  for(const p in valores){ 
+    const opt=document.createElement('option'); 
+    opt.value=p; 
+    opt.textContent=p+'x'; 
+    parcelasSelect.appendChild(opt); 
+  } 
+}
+function atualizarValor(){ 
+  valorDisplay.textContent=parseInt(valorRange.value).toLocaleString('pt-BR'); 
+  const valor=parseInt(valorRange.value); 
+  const parcelas=parcelasSelect.value; 
+  const valParc=tabela[valor]?.[parcelas]||0; 
+  parcelaValor.textContent='R$ '+valParc.toLocaleString('pt-BR',{minimumFractionDigits:2}); 
+}
+
+// EVENTOS
 valorRange.addEventListener('input',()=>{atualizarParcelas(); atualizarValor();});
 parcelasSelect.addEventListener('change', atualizarValor);
 
@@ -128,23 +202,36 @@ whatsBtn.addEventListener('click',()=>{
 });
 
 atualizarParcelas(); atualizarValor();
+</script>
+<!-- ==============================
+     JS SIMULADOR - FIM
+================================ -->
 
-// --- CARROSSEL FUNCIONAL ---
+<!-- ==============================
+     JS CARROSSEL - INICIO
+================================ -->
+<script>
+// ------------------------------
+ // CONFIGURAÇÃO INICIAL
+// ------------------------------
 const carouselTrack = document.getElementById('carousel-track');
 const carouselIndicators = document.getElementById('carousel-indicators');
 const carouselImages = ['1.jpg','2.jpg','3.jpg','4.jpg','5.jpg','6.jpg'];
+let index = 1;
+let startX = 0, currentX = 0, dragging = false;
 
+// ------------------------------
+ // FUNÇÃO DE SETUP DO CARROSSEL
+// ------------------------------
 function setupCarousel(){
   carouselTrack.innerHTML='';
   carouselIndicators.innerHTML='';
 
-  // clone último
   const lastClone = document.createElement('img');
   lastClone.src = carouselImages[carouselImages.length-1];
   lastClone.className='carousel-slide';
   carouselTrack.appendChild(lastClone);
 
-  // slides + indicadores
   carouselImages.forEach((src,i)=>{
     const slide = document.createElement('img');
     slide.src = src;
@@ -157,37 +244,49 @@ function setupCarousel(){
     carouselIndicators.appendChild(dot);
   });
 
-  // clone primeiro
   const firstClone = document.createElement('img');
   firstClone.src = carouselImages[0];
   firstClone.className='carousel-slide';
   carouselTrack.appendChild(firstClone);
 
-  return carouselTrack.children;
+  carouselTrack.style.transform = `translateX(-${index*100}%)`;
 }
 
-let slides = setupCarousel();
-let index = 1;
-carouselTrack.style.transform = `translateX(-${index*100}%)`;
-
-let startX=0, currentX=0, dragging=false;
-
+// ------------------------------
+ // FUNÇÃO DE ATUALIZAÇÃO DOS PONTINHOS
+// ------------------------------
 function updateIndicators(){
   const dots = carouselIndicators.children;
-  const i = (index-1 + carouselImages.length)%carouselImages.length;
+  const i = (index-1 + carouselImages.length) % carouselImages.length;
   Array.from(dots).forEach((d,j)=>d.classList.toggle('active', j===i));
 }
 
+// ------------------------------
+ // FUNÇÃO PARA IR PARA SLIDE ESPECÍFICO
+// ------------------------------
 function gotoSlide(i){
-  index=i;
-  carouselTrack.style.transition='transform 0.3s ease';
-  carouselTrack.style.transform=`translateX(-${index*100}%)`;
+  index = i;
+  carouselTrack.style.transition = 'transform 0.3s ease';
+  carouselTrack.style.transform = `translateX(-${index*100}%)`;
   updateIndicators();
 }
 
-// Drag / Touch
-function startDrag(x){ dragging=true; startX=x; carouselTrack.classList.add('grabbing'); carouselTrack.style.transition='none'; }
-function moveDrag(x){ if(!dragging) return; currentX=x-startX; carouselTrack.style.transform=`translateX(-${index*100 - (currentX/carouselTrack.clientWidth)*100}%)`; }
+// ------------------------------
+ // Drag / Touch
+// ------------------------------
+function startDrag(x){ 
+  dragging = true; 
+  startX = x; 
+  carouselTrack.classList.add('grabbing'); 
+  carouselTrack.style.transition='none'; 
+}
+
+function moveDrag(x){ 
+  if(!dragging) return; 
+  currentX = x - startX; 
+  carouselTrack.style.transform=`translateX(-${index*100 - (currentX/carouselTrack.clientWidth)*100}%)`; 
+}
+
 function endDrag(){
   if(!dragging) return;
   dragging=false;
@@ -199,14 +298,26 @@ function endDrag(){
   carouselTrack.style.transform=`translateX(-${index*100}%)`;
 }
 
-// Loop infinito
+// ------------------------------
+ // Loop infinito
+// ------------------------------
 carouselTrack.addEventListener('transitionend', ()=>{
-  if(index===0){ index=carouselImages.length; carouselTrack.style.transition='none'; carouselTrack.style.transform=`translateX(-${index*100}%)`; }
-  if(index===carouselImages.length+1){ index=1; carouselTrack.style.transition='none'; carouselTrack.style.transform=`translateX(-${index*100}%)`; }
+  if(index===0){ 
+    index=carouselImages.length; 
+    carouselTrack.style.transition='none'; 
+    carouselTrack.style.transform=`translateX(-${index*100}%)`; 
+  }
+  if(index===carouselImages.length+1){ 
+    index=1; 
+    carouselTrack.style.transition='none'; 
+    carouselTrack.style.transform=`translateX(-${index*100}%)`; 
+  }
   updateIndicators();
 });
 
-// Eventos mouse/touch
+// ------------------------------
+ // Eventos mouse e touch
+// ------------------------------
 carouselTrack.addEventListener('mousedown', e=>startDrag(e.clientX));
 carouselTrack.addEventListener('mousemove', e=>moveDrag(e.clientX));
 carouselTrack.addEventListener('mouseup', endDrag);
@@ -215,7 +326,19 @@ carouselTrack.addEventListener('touchstart', e=>startDrag(e.touches[0].clientX))
 carouselTrack.addEventListener('touchmove', e=>moveDrag(e.touches[0].clientX));
 carouselTrack.addEventListener('touchend', endDrag);
 
+// ------------------------------
+ // Resize
+// ------------------------------
 window.addEventListener('resize', ()=>carouselTrack.style.transform=`translateX(-${index*100}%)`);
+
+// ------------------------------
+ // Inicializar Carrossel
+// ------------------------------
+setupCarousel();
 </script>
+<!-- ==============================
+     JS CARROSSEL - FIM
+================================ -->
+
 </body>
 </html>
