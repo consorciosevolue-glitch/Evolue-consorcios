@@ -173,55 +173,11 @@
       font-size: 16px;
     }
 
-    /* CARROSSEL CSS */
-    #carousel-box {
-      position: relative;
-      width: 100%;
-      overflow: hidden;
-      height: 300px;
-    }
-
-    .carousel-container {
-      position: relative;
-      width: 100%;
-      height: 100%;
-    }
-
-    .carousel-track {
-      display: flex;
-      transition: transform 0.5s ease;
-      height: 100%;
-    }
-
-    .carousel-slide {
-      min-width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .carousel-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background-color: rgba(0,0,0,0.5);
-      color: white;
-      border: none;
-      padding: 10px;
-      cursor: pointer;
-      font-size: 24px;
-      z-index: 10;
-      border-radius: 50%;
-    }
-
-    .carousel-btn.prev { left: 10px; }
-    .carousel-btn.next { right: 10px; }
-    .carousel-btn:hover { background-color: rgba(0,0,0,0.7); }
-
   </style>
 </head>
 <body>
   <header>
-    <img src="logo-evolue.png" alt="Evolue Consórcios Logo">
+    <img src="logo.png" alt="Evolue Consórcios Logo">
   </header>
 
   <h1>Muito mais que uma escolha, uma evolução financeira</h1>
@@ -247,22 +203,7 @@
   <div class="portfolio">
     <h2 style="color: var(--accent);">Portfólio Evolue</h2>
     <div class="portfolio-box">Espaço reservado para vídeos</div>
-
-    <!-- CARROSSEL FUNCIONAL -->
-    <div class="portfolio-box" id="carousel-box">
-      <div class="carousel-container">
-        <button class="carousel-btn prev">&#10094;</button>
-        <div class="carousel-track">
-          <img src="files/1.jpg" class="carousel-slide" alt="Imagem 1">
-          <img src="files/2.jpg" class="carousel-slide" alt="Imagem 2">
-          <img src="files/3.jpg" class="carousel-slide" alt="Imagem 3">
-          <img src="files/4.jpg" class="carousel-slide" alt="Imagem 4">
-          <img src="files/5.jpg" class="carousel-slide" alt="Imagem 5">
-          <img src="files/6.jpg" class="carousel-slide" alt="Imagem 6">
-        </div>
-        <button class="carousel-btn next">&#10095;</button>
-      </div>
-    </div>
+    <div class="portfolio-box">Espaço reservado para carrosséis</div>
   </div>
 
   <footer>
@@ -273,10 +214,20 @@
   <a class="floating-btn" href="https://linktr.ee/evolueconsorcios" target="_blank">🔗</a>
 
   <script>
-    // SIMULADOR
-    const tabelaAuto = {10000:{60:280},20000:{60:560},30000:{60:840},40000:{60:1120},50000:{60:1400},100000:{60:2800},150000:{60:4200},200000:{60:5600}};
-    const tabelaImovel = {50000:{120:620},100000:{120:1240},200000:{120:2480},300000:{120:3720},400000:{120:4960},500000:{120:6200},600000:{120:7440}};
-    const tabelaInvest = {10000:{60:250},20000:{60:500},50000:{60:1250},100000:{60:2500},150000:{60:3750},200000:{60:5000}};
+    const tabelaAuto = {
+      10000: {60: 280}, 20000: {60: 560}, 30000: {60: 840},
+      40000: {60: 1120}, 50000: {60: 1400}, 100000: {60: 2800},
+      150000: {60: 4200}, 200000: {60: 5600}
+    };
+    const tabelaImovel = {
+      50000: {120: 620}, 100000: {120: 1240}, 200000: {120: 2480},
+      300000: {120: 3720}, 400000: {120: 4960}, 500000: {120: 6200},
+      600000: {120: 7440}
+    };
+    const tabelaInvest = {
+      10000: {60: 250}, 20000: {60: 500}, 50000: {60: 1250},
+      100000: {60: 2500}, 150000: {60: 3750}, 200000: {60: 5000}
+    };
 
     const valorRange = document.getElementById('valorRange');
     const valorDisplay = document.getElementById('valorDisplay');
@@ -287,85 +238,14 @@
     const investTab = document.getElementById('investTab');
     const whatsBtn = document.getElementById('whatsBtn');
 
-    let tipo='auto', tabela=tabelaAuto;
+    let tipo = 'auto';
+    let tabela = tabelaAuto;
 
-    function atualizarParcelas(){
-      parcelasSelect.innerHTML='';
-      const valores=tabela[parseInt(valorRange.value)];
-      for(const p in valores){
-        const opt=document.createElement('option');
-        opt.value=p; opt.textContent=p+'x';
-        parcelasSelect.appendChild(opt);
-      }
-    }
+    function atualizarParcelas() {
+      parcelasSelect.innerHTML = '';
+      const valores = tabela[parseInt(valorRange.value)];
+      for (const p in valores) {
+        const opt = document.createElement('option');
 
-    function atualizarValor(){
-      valorDisplay.textContent=parseInt(valorRange.value).toLocaleString('pt-BR');
-      const valor=parseInt(valorRange.value);
-      const parcelas=parcelasSelect.value;
-      const valParc=tabela[valor]?.[parcelas]||0;
-      parcelaValor.textContent='R$ '+valParc.toLocaleString('pt-BR',{minimumFractionDigits:2});
-    }
-
-    valorRange.addEventListener('input',()=>{atualizarParcelas(); atualizarValor();});
-    parcelasSelect.addEventListener('change', atualizarValor);
-
-    autoTab.addEventListener('click',()=>{
-      tipo='auto'; tabela=tabelaAuto;
-      autoTab.classList.add('active'); imovelTab.classList.remove('active'); investTab.classList.remove('active');
-      valorRange.min=10000; valorRange.max=200000; valorRange.step=10000; valorRange.value=10000;
-      atualizarParcelas(); atualizarValor();
-    });
-
-    imovelTab.addEventListener('click',()=>{
-      tipo='imovel'; tabela=tabelaImovel;
-      autoTab.classList.remove('active'); imovelTab.classList.add('active'); investTab.classList.remove('active');
-      valorRange.min=50000; valorRange.max=600000; valorRange.step=50000; valorRange.value=50000;
-      atualizarParcelas(); atualizarValor();
-    });
-
-    investTab.addEventListener('click',()=>{
-      tipo='invest'; tabela=tabelaInvest;
-      autoTab.classList.remove('active'); imovelTab.classList.remove('active'); investTab.classList.add('active');
-      valorRange.min=10000; valorRange.max=200000; valorRange.step=10000; valorRange.value=10000;
-      atualizarParcelas(); atualizarValor();
-    });
-
-    whatsBtn.addEventListener('click',()=>{
-      const valor=parseInt(valorRange.value).toLocaleString('pt-BR');
-      const parcelas=parcelasSelect.value;
-      const valParc=parcelaValor.textContent;
-      const msg=encodeURIComponent(`Olá! Gostaria de simular um consórcio de ${tipo==='auto'?'automóvel':tipo==='imovel'?'imóvel':'investimento'}.\nValor total: R$ ${valor}\nParcela estimada: ${valParc}\nQuantidade: ${parcelas}x`);
-      const num='554598486848';
-      window.open(`https://wa.me/${num}?text=${msg}`,'_blank');
-    });
-
-    atualizarParcelas(); atualizarValor();
-
-    // CARROSSEL JS
-    const prevBtn = document.querySelector('.carousel-btn.prev');
-    const nextBtn = document.querySelector('.carousel-btn.next');
-    const track = document.querySelector('.carousel-track');
-    const slides = document.querySelectorAll('.carousel-slide');
-    let index = 0;
-
-    function updateCarousel(){
-      const slideWidth = slides[0].clientWidth;
-      track.style.transform = `translateX(-${index * slideWidth}px)`;
-    }
-
-    prevBtn.addEventListener('click', ()=>{
-      index = (index>0)? index-1 : slides.length-1;
-      updateCarousel();
-    });
-
-    nextBtn.addEventListener('click', ()=>{
-      index = (index<slides.length-1)? index+1 : 0;
-      updateCarousel();
-    });
-
-    window.addEventListener('resize', updateCarousel);
-
-  </script>
-</body>
-</html>
+::contentReference[oaicite:15]{index=15}
+ 
