@@ -48,15 +48,68 @@ footer { margin-top:40px; font-size:13px; color:#aaa; text-align:center; padding
      CSS CARROSSEL - INICIO
 ================================ -->
 <style>
-#carousel-box { position: relative; width:100%; padding-top:100%; overflow:hidden; }
-.carousel-container { position:absolute; top:0; left:0; width:100%; height:100%; overflow:hidden; }
-.carousel-track { display:flex; height:100%; cursor:grab; transition:transform 0.3s ease; }
-.carousel-track.grabbing { cursor:grabbing; }
-.carousel-slide { min-width:100%; height:100%; object-fit:cover; user-select:none; }
+#carousel-box { 
+  position: relative; 
+  width:100%; 
+  padding-top:100%; 
+  overflow:hidden; 
+}
 
-.carousel-indicators { display:flex; justify-content:center; margin-top:10px; gap:6px; position:relative; }
-.carousel-indicators span { display:block; width:10px; height:10px; background:rgba(212,175,55,0.3); border-radius:50%; transition:0.3s; cursor:pointer; }
-.carousel-indicators span.active { background:var(--accent); }
+.carousel-container { 
+  position:absolute; 
+  top:0; 
+  left:0; 
+  width:100%; 
+  height:100%; 
+  overflow:hidden; 
+}
+
+.carousel-track { 
+  display:flex; 
+  height:100%; 
+  cursor:grab; 
+  transition:transform 0.3s ease; 
+}
+
+.carousel-track.grabbing { 
+  cursor:grabbing; 
+}
+
+.carousel-slide { 
+  min-width:100%; 
+  height:100%; 
+  object-fit:cover; 
+  user-select:none; 
+}
+
+/* 🔽🔽🔽 PONTINHOS CORRIGIDOS 🔽🔽🔽 */
+.carousel-indicators { 
+  display:flex; 
+  justify-content:center; 
+  align-items:center;
+  margin-top:15px;  /* Aumenta o espaço visível abaixo do carrossel */
+  gap:8px; 
+  position:relative; 
+}
+
+.carousel-indicators span { 
+  display:block; 
+  width:10px; 
+  height:10px; 
+  background:rgba(212,175,55,0.3); 
+  border-radius:50%; 
+  transition:0.3s; 
+  cursor:pointer; 
+}
+
+.carousel-indicators span.active { 
+  background:var(--accent); 
+}
+
+/* 🔽 Adiciona espaço extra na seção pra não colar no rodapé */
+.portfolio {
+  margin-bottom: 30px; 
+}
 </style>
 <!-- ==============================
      CSS CARROSSEL - FIM
@@ -112,15 +165,16 @@ footer { margin-top:40px; font-size:13px; color:#aaa; text-align:center; padding
 <div class="portfolio">
   <h2 style="color: var(--accent);">Portfólio Evolue</h2>
   <div class="portfolio-box">Espaço reservado para vídeos</div>
-
   <!-- CARROSSEL -->
-  <div class="portfolio-box" id="carousel-box">
-    <div class="carousel-container">
-      <div class="carousel-track" id="carousel-track"></div>
-    </div>
-    <div class="carousel-indicators" id="carousel-indicators"></div>
+<div class="portfolio-box" id="carousel-box">
+  <div class="carousel-container">
+    <div class="carousel-track" id="carousel-track"></div>
   </div>
 </div>
+
+<!-- Pontinhos do carrossel -->
+<div class="carousel-indicators" id="carousel-indicators"></div>
+
 <!-- ==============================
      PORTFOLIO / CARROSSEL - FIM
 ================================ -->
