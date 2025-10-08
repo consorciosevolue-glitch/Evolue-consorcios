@@ -224,34 +224,39 @@ let startX = 0, currentX = 0, dragging = false;
  // FUNÇÃO DE SETUP DO CARROSSEL
 // ------------------------------
 function setupCarousel(){
-  carouselTrack.innerHTML='';
-  carouselIndicators.innerHTML='';
+  carouselTrack.innerHTML = '';
+  carouselIndicators.innerHTML = '';
 
+  // Cria clone do último slide no início
   const lastClone = document.createElement('img');
-  lastClone.src = carouselImages[carouselImages.length-1];
-  lastClone.className='carousel-slide';
+  lastClone.src = carouselImages[carouselImages.length - 1];
+  lastClone.className = 'carousel-slide';
   carouselTrack.appendChild(lastClone);
 
-  carouselImages.forEach((src,i)=>{
+  // Cria slides e pontinhos
+  carouselImages.forEach((src, i) => {
     const slide = document.createElement('img');
     slide.src = src;
-    slide.className='carousel-slide';
+    slide.className = 'carousel-slide';
     carouselTrack.appendChild(slide);
 
     const dot = document.createElement('span');
-    if(i===0) dot.classList.add('active');
-    dot.addEventListener('click', ()=>gotoSlide(i+1));
+    dot.addEventListener('click', () => gotoSlide(i + 1));
     carouselIndicators.appendChild(dot);
   });
 
+  // Cria clone do primeiro slide no final
   const firstClone = document.createElement('img');
   firstClone.src = carouselImages[0];
-  firstClone.className='carousel-slide';
+  firstClone.className = 'carousel-slide';
   carouselTrack.appendChild(firstClone);
 
-  carouselTrack.style.transform = `translateX(-${index*100}%)`;
-}
+  // Define posição inicial
+  carouselTrack.style.transform = `translateX(-${index * 100}%)`;
 
+  // Atualiza os pontinhos já na inicialização
+  updateIndicators();
+}
 // ------------------------------
  // FUNÇÃO DE ATUALIZAÇÃO DOS PONTINHOS
 // ------------------------------
@@ -337,14 +342,6 @@ carouselTrack.addEventListener('transitionend', ()=>{
 // ------------------------------
  // Eventos mouse e touch
 // ------------------------------
-carouselTrack.addEventListener('mousedown', e=>startDrag(e.clientX));
-carouselTrack.addEventListener('mousemove', e=>moveDrag(e.clientX));
-carouselTrack.addEventListener('mouseup', endDrag);
-carouselTrack.addEventListener('mouseleave', endDrag);
-carouselTrack.addEventListener('touchstart', e=>startDrag(e.touches[0].clientX));
-carouselTrack.addEventListener('touchmove', e=>moveDrag(e.touches[0].clientX));
-carouselTrack.addEventListener('touchend', endDrag);
-
 // ------------------------------
  // Resize
 // ------------------------------
