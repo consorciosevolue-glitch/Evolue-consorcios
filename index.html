@@ -17,7 +17,55 @@ header { width:100%; background:#0d0d0d; padding:16px 0; text-align:center; box-
 header img { width:180px; animation: fadeInDown 1s ease; }
 @keyframes fadeInDown { from{opacity:0; transform:translateY(-10px);} to{opacity:1; transform:translateY(0);} }
 
-h1 { color:var(--accent); text-align:center; margin-top:20px; font-size:1.8rem; }
+/* ===============================
+   TITULO NEON TOPO
+================================ */
+.top-title-neon {
+  font-size: 3rem;
+  font-weight: 900;
+  text-align: center;
+  color: #d4af37;
+  text-shadow:
+    0 0 5px #d4af37,
+    0 0 10px #d4af37,
+    0 0 20px #fff,
+    0 0 30px #d4af37,
+    0 0 40px #d4af37,
+    0 0 55px #d4af37,
+    0 0 75px #d4af37;
+  animation: neonPulse 1.5s ease-in-out infinite alternate, fadeSlideInTop 1s ease forwards;
+  opacity: 0;
+  transform: translateY(-20px);
+  margin-top: 20px;
+}
+
+@keyframes neonPulse {
+  from {
+    text-shadow:
+      0 0 5px #d4af37,
+      0 0 10px #d4af37,
+      0 0 20px #fff,
+      0 0 30px #d4af37,
+      0 0 40px #d4af37,
+      0 0 55px #d4af37,
+      0 0 75px #d4af37;
+  }
+  to {
+    text-shadow:
+      0 0 10px #fff,
+      0 0 20px #d4af37,
+      0 0 30px #fff,
+      0 0 40px #d4af37,
+      0 0 50px #fff,
+      0 0 65px #d4af37,
+      0 0 85px #fff;
+  }
+}
+
+@keyframes fadeSlideInTop {
+  to { opacity: 1; transform: translateY(0); }
+}
+
 .container { max-width:600px; width:90%; background:#111; border-radius:12px; padding:24px; margin-top:20px; box-shadow:0 0 25px rgba(212,175,55,0.15); animation:fadeInUp 1s ease; }
 @keyframes fadeInUp { from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
 
@@ -41,7 +89,7 @@ footer { margin-top:40px; font-size:13px; color:#aaa; text-align:center; padding
 .portfolio-box { background:#111; margin:15px 0; border-radius:12px; box-shadow:0 0 15px rgba(212,175,55,0.15); display:flex; justify-content:center; align-items:center; color:#555; font-size:16px; padding:10px; }
 
 /* ===============================
-   CSS TÍTULO ANIMADO
+   CSS TÍTULO PORTFOLIO
 ================================ */
 .highlight-title {
   font-size: 2rem;
@@ -186,7 +234,7 @@ footer { margin-top:40px; font-size:13px; color:#aaa; text-align:center; padding
 <!-- ==============================
      TITULO PRINCIPAL - INICIO
 ================================ -->
-<h1>Muito mais que uma escolha, uma evolução financeira</h1>
+<h1 class="top-title-neon">Faça sua cotação</h1>
 <!-- ==============================
      TITULO PRINCIPAL - FIM
 ================================ -->
@@ -245,10 +293,14 @@ footer { margin-top:40px; font-size:13px; color:#aaa; text-align:center; padding
 
 <!-- Pontinhos do carrossel -->
 <div class="carousel-indicators" id="carousel-indicators"></div>
-
 <!-- ==============================
      PORTFOLIO / CARROSSEL - FIM
 ================================ -->
+
+<!-- ==============================
+     SLIDE DO SLOGAN - FINAL
+================================ -->
+<h1 class="highlight-title" style="margin-top:40px; font-size:1.5rem;">Muito mais que uma escolha, uma evolução financeira</h1>
 
 <!-- ==============================
      FOOTER - INICIO
