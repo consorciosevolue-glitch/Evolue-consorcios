@@ -76,15 +76,12 @@ footer { margin-top:40px; font-size:13px; color:#aaa; text-align:center; padding
 <h2 style="color: var(--accent);">Portfólio Evolue</h2>
 <div class="portfolio-box">Espaço reservado para vídeos</div>
 
+<!-- CARROSSEL -->
 <div class="portfolio-box" id="carousel-box">
-<div class="carousel-container">
-<div class="carousel-track" id="carousel-track">
-<!-- Clones serão adicionados dinamicamente pelo JS -->
-</div>
-</div>
-<div class="carousel-indicators" id="carousel-indicators">
-<!-- Pontinhos serão gerados pelo JS -->
-</div>
+  <div class="carousel-container">
+    <div class="carousel-track" id="carousel-track"></div>
+  </div>
+  <div class="carousel-indicators" id="carousel-indicators"></div>
 </div>
 </div>
 
@@ -121,99 +118,104 @@ autoTab.addEventListener('click',()=>{ tipo='auto'; tabela=tabelaAuto; autoTab.c
 imovelTab.addEventListener('click',()=>{ tipo='imovel'; tabela=tabelaImovel; autoTab.classList.remove('active'); imovelTab.classList.add('active'); investTab.classList.remove('active'); valorRange.min=50000; valorRange.max=600000; valorRange.step=50000; valorRange.value=50000; atualizarParcelas(); atualizarValor(); });
 investTab.addEventListener('click',()=>{ tipo='invest'; tabela=tabelaInvest; autoTab.classList.remove('active'); imovelTab.classList.remove('active'); investTab.classList.add('active'); valorRange.min=10000; valorRange.max=200000; valorRange.step=10000; valorRange.value=10000; atualizarParcelas(); atualizarValor(); });
 
-whatsBtn.addEventListener('click',()=>{ const valor=parseInt(valorRange.value).toLocaleString('pt-BR'); const parcelas=parcelasSelect.value; const valParc=parcelaValor.textContent; const msg=encodeURIComponent(`Olá! Gostaria de simular um consórcio de ${tipo==='auto'?'automóvel':tipo==='imovel'?'imóvel':'investimento'}.\nValor total: R$ ${valor}\nParcela estimada: ${valParc}\nQuantidade: ${parcelas}x`); const num='554598486848'; window.open(`https://wa.me/${num}?text=${msg}`,'_blank'); });
+whatsBtn.addEventListener('click',()=>{
+  const valor=parseInt(valorRange.value).toLocaleString('pt-BR');
+  const parcelas=parcelasSelect.value;
+  const valParc=parcelaValor.textContent;
+  const msg=encodeURIComponent(`Olá! Gostaria de simular um consórcio de ${tipo==='auto'?'automóvel':tipo==='imovel'?'imóvel':'investimento'}.\nValor total: R$ ${valor}\nParcela estimada: ${valParc}\nQuantidade: ${parcelas}x`);
+  const num='554598486848';
+  window.open(`https://wa.me/${num}?text=${msg}`,'_blank');
+});
 
 atualizarParcelas(); atualizarValor();
 
 // --- CARROSSEL FUNCIONAL ---
-const track = document.getElementById('carousel-track');
-const indicatorsContainer = document.getElementById('carousel-indicators');
-const images = ['1.jpg','2.jpg','3.jpg','4.jpg','5.jpg','6.jpg'];
+const carouselTrack = document.getElementById('carousel-track');
+const carouselIndicators = document.getElementById('carousel-indicators');
+const carouselImages = ['1.jpg','2.jpg','3.jpg','4.jpg','5.jpg','6.jpg'];
 
-// Gerar slides + clones para loop
 function setupCarousel(){
-  track.innerHTML='';
-  indicatorsContainer.innerHTML='';
-  const slides = [];
+  carouselTrack.innerHTML='';
+  carouselIndicators.innerHTML='';
 
   // clone último
-  let lastClone = document.createElement('img');
-  lastClone.src = images[images.length-1];
+  const lastClone = document.createElement('img');
+  lastClone.src = carouselImages[carouselImages.length-1];
   lastClone.className='carousel-slide';
-  track.appendChild(lastClone);
+  carouselTrack.appendChild(lastClone);
 
-  // slides originais
-  images.forEach((img, i)=>{
-    let slide = document.createElement('img');
-    slide.src=img;
+  // slides + indicadores
+  carouselImages.forEach((src,i)=>{
+    const slide = document.createElement('img');
+    slide.src = src;
     slide.className='carousel-slide';
-    track.appendChild(slide);
+    carouselTrack.appendChild(slide);
 
-    // indicador
-    let dot = document.createElement('span');
+    const dot = document.createElement('span');
     if(i===0) dot.classList.add('active');
     dot.addEventListener('click', ()=>gotoSlide(i+1));
-    indicatorsContainer.appendChild(dot);
+    carouselIndicators.appendChild(dot);
   });
 
   // clone primeiro
-  let firstClone = document.createElement('img');
-  firstClone.src = images[0];
+  const firstClone = document.createElement('img');
+  firstClone.src = carouselImages[0];
   firstClone.className='carousel-slide';
-  track.appendChild(firstClone);
+  carouselTrack.appendChild(firstClone);
 
-  return track.children;
+  return carouselTrack.children;
 }
 
 let slides = setupCarousel();
 let index = 1;
-track.style.transform = `translateX(-${index*100}%)`;
+carouselTrack.style.transform = `translateX(-${index*100}%)`;
 
 let startX=0, currentX=0, dragging=false;
 
 function updateIndicators(){
-  let dots = indicatorsContainer.children;
-  let i = (index-1 + images.length)%images.length;
-  Array.from(dots).forEach((d,j)=>d.classList.toggle('active',j===i));
+  const dots = carouselIndicators.children;
+  const i = (index-1 + carouselImages.length)%carouselImages.length;
+  Array.from(dots).forEach((d,j)=>d.classList.toggle('active', j===i));
 }
 
 function gotoSlide(i){
   index=i;
-  track.style.transition='transform 0.3s ease';
-  track.style.transform = `translateX(-${index*100}%)`;
+  carouselTrack.style.transition='transform 0.3s ease';
+  carouselTrack.style.transform=`translateX(-${index*100}%)`;
   updateIndicators();
 }
 
-// Drag/Touch
-function startDrag(x){ dragging=true; startX=x; track.classList.add('grabbing'); track.style.transition='none'; }
-function moveDrag(x){ if(!dragging) return; currentX=x-startX; track.style.transform=`translateX(-${index*100 - (currentX/track.clientWidth)*100}%)`; }
+// Drag / Touch
+function startDrag(x){ dragging=true; startX=x; carouselTrack.classList.add('grabbing'); carouselTrack.style.transition='none'; }
+function moveDrag(x){ if(!dragging) return; currentX=x-startX; carouselTrack.style.transform=`translateX(-${index*100 - (currentX/carouselTrack.clientWidth)*100}%)`; }
 function endDrag(){
   if(!dragging) return;
-  dragging=false; track.classList.remove('grabbing');
-  if(currentX < -track.clientWidth/4) index++;
-  else if(currentX > track.clientWidth/4) index--;
+  dragging=false;
+  carouselTrack.classList.remove('grabbing');
+  if(currentX < -carouselTrack.clientWidth/4) index++;
+  else if(currentX > carouselTrack.clientWidth/4) index--;
   currentX=0;
-  track.style.transition='transform 0.3s ease';
-  track.style.transform=`translateX(-${index*100}%)`;
+  carouselTrack.style.transition='transform 0.3s ease';
+  carouselTrack.style.transform=`translateX(-${index*100}%)`;
 }
 
 // Loop infinito
-track.addEventListener('transitionend', ()=>{
-  if(index===0){ index=images.length; track.style.transition='none'; track.style.transform=`translateX(-${index*100}%)`; }
-  if(index===images.length+1){ index=1; track.style.transition='none'; track.style.transform=`translateX(-${index*100}%)`; }
+carouselTrack.addEventListener('transitionend', ()=>{
+  if(index===0){ index=carouselImages.length; carouselTrack.style.transition='none'; carouselTrack.style.transform=`translateX(-${index*100}%)`; }
+  if(index===carouselImages.length+1){ index=1; carouselTrack.style.transition='none'; carouselTrack.style.transform=`translateX(-${index*100}%)`; }
   updateIndicators();
 });
 
-track.addEventListener('mousedown', e=>startDrag(e.clientX));
-track.addEventListener('mousemove', e=>moveDrag(e.clientX));
-track.addEventListener('mouseup', endDrag);
-track.addEventListener('mouseleave', endDrag);
+// Eventos mouse/touch
+carouselTrack.addEventListener('mousedown', e=>startDrag(e.clientX));
+carouselTrack.addEventListener('mousemove', e=>moveDrag(e.clientX));
+carouselTrack.addEventListener('mouseup', endDrag);
+carouselTrack.addEventListener('mouseleave', endDrag);
+carouselTrack.addEventListener('touchstart', e=>startDrag(e.touches[0].clientX));
+carouselTrack.addEventListener('touchmove', e=>moveDrag(e.touches[0].clientX));
+carouselTrack.addEventListener('touchend', endDrag);
 
-track.addEventListener('touchstart', e=>startDrag(e.touches[0].clientX));
-track.addEventListener('touchmove', e=>moveDrag(e.touches[0].clientX));
-track.addEventListener('touchend', endDrag);
-
-window.addEventListener('resize', ()=>track.style.transform = `translateX(-${index*100}%)`);
+window.addEventListener('resize', ()=>carouselTrack.style.transform=`translateX(-${index*100}%)`);
 </script>
 </body>
 </html>
