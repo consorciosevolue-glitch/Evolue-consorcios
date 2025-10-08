@@ -5,176 +5,187 @@
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>Evolue Consórcios</title>
 <style>
-  :root {
-    --bg: #000;
-    --text: #fff;
-    --accent: #d4af37;
-    --accent-dark: #b68b2a;
-  }
+:root {
+  --bg: #000;
+  --text: #fff;
+  --accent: #d4af37;
+  --accent-dark: #b68b2a;
+}
 
-  * { box-sizing: border-box; font-family: 'Inter', system-ui, sans-serif; }
-  body { margin: 0; background: var(--bg); color: var(--text); padding: 0; display: flex; flex-direction: column; align-items: center; }
+* { box-sizing: border-box; font-family: 'Inter', system-ui, sans-serif; }
+body { margin: 0; background: var(--bg); color: var(--text); padding: 0; display: flex; flex-direction: column; align-items: center; }
 
-  header { width: 100%; background: #0d0d0d; padding: 16px 0; text-align: center; box-shadow: 0 0 10px rgba(212,175,55,0.2); }
-  header img { width: 180px; animation: fadeInDown 1s ease; }
-  @keyframes fadeInDown { from {opacity:0; transform:translateY(-10px);} to {opacity:1; transform:translateY(0);} }
+header { width: 100%; background: #0d0d0d; padding: 16px 0; text-align: center; box-shadow: 0 0 10px rgba(212,175,55,0.2); }
+header img { width: 180px; animation: fadeInDown 1s ease; }
+@keyframes fadeInDown { from {opacity:0; transform:translateY(-10px);} to {opacity:1; transform:translateY(0);} }
 
-  h1 { color: var(--accent); text-align:center; margin-top:20px; font-size:1.8rem; }
+h1 { color: var(--accent); text-align:center; margin-top:20px; font-size:1.8rem; }
 
-  .container { max-width:600px; width:90%; background:#111; border-radius:12px; padding:24px; margin-top:20px; box-shadow:0 0 25px rgba(212,175,55,0.15); animation:fadeInUp 1s ease; }
-  @keyframes fadeInUp { from {opacity:0; transform:translateY(10px);} to {opacity:1; transform:translateY(0);} }
+.container { max-width:600px; width:90%; background:#111; border-radius:12px; padding:24px; margin-top:20px; box-shadow:0 0 25px rgba(212,175,55,0.15); animation:fadeInUp 1s ease; }
+@keyframes fadeInUp { from {opacity:0; transform:translateY(10px);} to {opacity:1; transform:translateY(0);} }
 
-  .tabs { display:flex; justify-content:space-around; margin-bottom:20px; }
-  .tab { padding:10px 20px; border-radius:8px; cursor:pointer; background:#222; transition:0.3s; }
-  .tab.active { background:var(--accent); color:#000; font-weight:600; }
+.tabs { display:flex; justify-content:space-around; margin-bottom:20px; }
+.tab { padding:10px 20px; border-radius:8px; cursor:pointer; background:#222; transition:0.3s; }
+.tab.active { background:var(--accent); color:#000; font-weight:600; }
 
-  input[type=range] { width:100%; margin:10px 0; accent-color:var(--accent); }
-  select, button { width:100%; padding:10px; border:none; border-radius:8px; margin:8px 0; font-size:16px; }
-  select { background:#222; color:#fff; }
-  button { background:var(--accent); color:#000; font-weight:bold; cursor:pointer; transition:0.3s; }
-  button:hover { background-color:var(--accent-dark); }
+input[type=range] { width:100%; margin:10px 0; accent-color:var(--accent); }
+select, button { width:100%; padding:10px; border:none; border-radius:8px; margin:8px 0; font-size:16px; }
+select { background:#222; color:#fff; }
+button { background:var(--accent); color:#000; font-weight:bold; cursor:pointer; transition:0.3s; }
+button:hover { background-color:var(--accent-dark); }
 
-  .result { text-align:center; margin-top:20px; font-size:20px; color:var(--accent); }
-  footer { margin-top:40px; font-size:13px; color:#aaa; text-align:center; padding-bottom:60px; }
+.result { text-align:center; margin-top:20px; font-size:20px; color:var(--accent); }
+footer { margin-top:40px; font-size:13px; color:#aaa; text-align:center; padding-bottom:60px; }
 
-  .floating-btn { position:fixed; bottom:20px; right:20px; background:var(--accent); color:#000; padding:14px 18px; border-radius:50%; box-shadow:0 0 15px rgba(212,175,55,0.4); font-size:22px; text-decoration:none; transition:0.3s; }
-  .floating-btn:hover { background-color:var(--accent-dark); }
+.floating-btn { position:fixed; bottom:20px; right:20px; background:var(--accent); color:#000; padding:14px 18px; border-radius:50%; box-shadow:0 0 15px rgba(212,175,55,0.4); font-size:22px; text-decoration:none; transition:0.3s; }
+.floating-btn:hover { background-color:var(--accent-dark); }
 
-  .portfolio { max-width:600px; width:90%; margin-top:40px; text-align:center; }
-  .portfolio-box { background:#111; height:200px; margin:15px 0; border-radius:12px; box-shadow:0 0 15px rgba(212,175,55,0.15); display:flex; justify-content:center; align-items:center; color:#555; font-size:16px; }
+.portfolio { max-width:600px; width:90%; margin-top:40px; text-align:center; }
+.portfolio-box { background:#111; height:200px; margin:15px 0; border-radius:12px; box-shadow:0 0 15px rgba(212,175,55,0.15); display:flex; justify-content:center; align-items:center; color:#555; font-size:16px; }
 
-  /* CARROSSEL ARRASTÁVEL */
-  #carousel-box { position: relative; width:100%; padding-top:100%; overflow:hidden; }
-  .carousel-container { position:absolute; top:0; left:0; width:100%; height:100%; overflow:hidden; }
-  .carousel-track { display:flex; transition:transform 0.3s ease; height:100%; cursor:grab; }
-  .carousel-track.grabbing { cursor:grabbing; }
-  .carousel-slide { min-width:100%; height:100%; object-fit:cover; user-select:none; pointer-events:none; }
+/* CARROSSEL ARRASTÁVEL */
+#carousel-box { position: relative; width:100%; padding-top:100%; overflow:hidden; }
+.carousel-container { position:absolute; top:0; left:0; width:100%; height:100%; overflow:hidden; }
+.carousel-track { display:flex; transition:transform 0.3s ease; height:100%; cursor:grab; }
+.carousel-track.grabbing { cursor:grabbing; }
+.carousel-slide { min-width:100%; height:100%; object-fit:cover; user-select:none; pointer-events:none; }
 
-  /* Indicadores */
-  .carousel-indicators { display:flex; justify-content:center; margin-top:10px; gap:6px; }
-  .carousel-indicators span { display:block; width:10px; height:10px; background:rgba(212,175,55,0.3); border-radius:50%; transition:0.3s; }
-  .carousel-indicators span.active { background:var(--accent); }
+/* Indicadores */
+.carousel-indicators { display:flex; justify-content:center; margin-top:10px; gap:6px; position:relative; }
+.carousel-indicators span { display:block; width:10px; height:10px; background:rgba(212,175,55,0.3); border-radius:50%; transition:0.3s; cursor:pointer; }
+.carousel-indicators span.active { background:var(--accent); }
 </style>
 </head>
 <body>
 <header>
-  <img src="logo-evolue.png" alt="Evolue Consórcios Logo">
+<img src="logo-evolue.png" alt="Evolue Consórcios Logo">
 </header>
 
 <h1>Muito mais que uma escolha, uma evolução financeira</h1>
 
 <div class="container">
-  <div class="tabs">
-    <div class="tab active" id="autoTab">🚗 Automóvel</div>
-    <div class="tab" id="imovelTab">🏠 Imóvel</div>
-    <div class="tab" id="investTab">💼 Investimento</div>
-  </div>
+<div class="tabs">
+<div class="tab active" id="autoTab">🚗 Automóvel</div>
+<div class="tab" id="imovelTab">🏠 Imóvel</div>
+<div class="tab" id="investTab">💼 Investimento</div>
+</div>
 
-  <label>Valor do crédito: R$ <span id="valorDisplay">10000</span></label>
-  <input type="range" id="valorRange" min="10000" max="200000" step="10000" value="10000">
+<label>Valor do crédito: R$ <span id="valorDisplay">10000</span></label>
+<input type="range" id="valorRange" min="10000" max="200000" step="10000" value="10000">
 
-  <label>Número de parcelas:</label>
-  <select id="parcelasSelect"></select>
+<label>Número de parcelas:</label>
+<select id="parcelasSelect"></select>
 
-  <div class="result">Parcela estimada: <strong id="parcelaValor">R$ 0,00</strong></div>
+<div class="result">Parcela estimada: <strong id="parcelaValor">R$ 0,00</strong></div>
 
-  <button id="whatsBtn">💬 Simular no WhatsApp</button>
+<button id="whatsBtn">💬 Simular no WhatsApp</button>
 </div>
 
 <div class="portfolio">
-  <h2 style="color: var(--accent);">Portfólio Evolue</h2>
-  <div class="portfolio-box">Espaço reservado para vídeos</div>
+<h2 style="color: var(--accent);">Portfólio Evolue</h2>
+<div class="portfolio-box">Espaço reservado para vídeos</div>
 
-  <!-- CARROSSEL ARRASTÁVEL -->
-  <div class="portfolio-box" id="carousel-box">
-    <div class="carousel-container">
-      <div class="carousel-track" id="carousel-track">
-        <img src="1.jpg" class="carousel-slide" alt="Imagem 1">
-        <img src="2.jpg" class="carousel-slide" alt="Imagem 2">
-        <img src="3.jpg" class="carousel-slide" alt="Imagem 3">
-        <img src="4.jpg" class="carousel-slide" alt="Imagem 4">
-        <img src="5.jpg" class="carousel-slide" alt="Imagem 5">
-        <img src="6.jpg" class="carousel-slide" alt="Imagem 6">
-      </div>
-    </div>
-    <div class="carousel-indicators" id="carousel-indicators">
-      <span class="active"></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-  </div>
+<div class="portfolio-box" id="carousel-box">
+<div class="carousel-container">
+<div class="carousel-track" id="carousel-track">
+<img src="1.jpg" class="carousel-slide" alt="Imagem 1">
+<img src="2.jpg" class="carousel-slide" alt="Imagem 2">
+<img src="3.jpg" class="carousel-slide" alt="Imagem 3">
+<img src="4.jpg" class="carousel-slide" alt="Imagem 4">
+<img src="5.jpg" class="carousel-slide" alt="Imagem 5">
+<img src="6.jpg" class="carousel-slide" alt="Imagem 6">
+</div>
+</div>
+<div class="carousel-indicators" id="carousel-indicators">
+<span class="active"></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+</div>
+</div>
 </div>
 
 <footer>
-  Evolue Consórcios • Avenida Brasil, 5577 — Cascavel/PR<br>
-  📧 consorciosevolue@gmail.com
+Evolue Consórcios • Avenida Brasil, 5577 — Cascavel/PR<br>
+📧 consorciosevolue@gmail.com
 </footer>
 
 <a class="floating-btn" href="https://linktr.ee/evolueconsorcios" target="_blank">🔗</a>
 
 <script>
-  // SIMULADOR
-  const tabelaAuto={10000:{60:280},20000:{60:560},30000:{60:840},40000:{60:1120},50000:{60:1400},100000:{60:2800},150000:{60:4200},200000:{60:5600}};
-  const tabelaImovel={50000:{120:620},100000:{120:1240},200000:{120:2480},300000:{120:3720},400000:{120:4960},500000:{120:6200},600000:{120:7440}};
-  const tabelaInvest={10000:{60:250},20000:{60:500},50000:{60:1250},100000:{60:2500},150000:{60:3750},200000:{60:5000}};
+// SIMULADOR
+const tabelaAuto={10000:{60:280},20000:{60:560},30000:{60:840},40000:{60:1120},50000:{60:1400},100000:{60:2800},150000:{60:4200},200000:{60:5600}};
+const tabelaImovel={50000:{120:620},100000:{120:1240},200000:{120:2480},300000:{120:3720},400000:{120:4960},500000:{120:6200},600000:{120:7440}};
+const tabelaInvest={10000:{60:250},20000:{60:500},50000:{60:1250},100000:{60:2500},150000:{60:3750},200000:{60:5000}};
 
-  const valorRange=document.getElementById('valorRange');
-  const valorDisplay=document.getElementById('valorDisplay');
-  const parcelaValor=document.getElementById('parcelaValor');
-  const parcelasSelect=document.getElementById('parcelasSelect');
-  const autoTab=document.getElementById('autoTab');
-  const imovelTab=document.getElementById('imovelTab');
-  const investTab=document.getElementById('investTab');
-  const whatsBtn=document.getElementById('whatsBtn');
+const valorRange=document.getElementById('valorRange');
+const valorDisplay=document.getElementById('valorDisplay');
+const parcelaValor=document.getElementById('parcelaValor');
+const parcelasSelect=document.getElementById('parcelasSelect');
+const autoTab=document.getElementById('autoTab');
+const imovelTab=document.getElementById('imovelTab');
+const investTab=document.getElementById('investTab');
+const whatsBtn=document.getElementById('whatsBtn');
 
-  let tipo='auto', tabela=tabelaAuto;
+let tipo='auto', tabela=tabelaAuto;
 
-  function atualizarParcelas(){ parcelasSelect.innerHTML=''; const valores=tabela[parseInt(valorRange.value)]; for(const p in valores){ const opt=document.createElement('option'); opt.value=p; opt.textContent=p+'x'; parcelasSelect.appendChild(opt); } }
-  function atualizarValor(){ valorDisplay.textContent=parseInt(valorRange.value).toLocaleString('pt-BR'); const valor=parseInt(valorRange.value); const parcelas=parcelasSelect.value; const valParc=tabela[valor]?.[parcelas]||0; parcelaValor.textContent='R$ '+valParc.toLocaleString('pt-BR',{minimumFractionDigits:2}); }
-  valorRange.addEventListener('input',()=>{atualizarParcelas(); atualizarValor();});
-  parcelasSelect.addEventListener('change', atualizarValor);
+function atualizarParcelas(){ parcelasSelect.innerHTML=''; const valores=tabela[parseInt(valorRange.value)]; for(const p in valores){ const opt=document.createElement('option'); opt.value=p; opt.textContent=p+'x'; parcelasSelect.appendChild(opt); } }
+function atualizarValor(){ valorDisplay.textContent=parseInt(valorRange.value).toLocaleString('pt-BR'); const valor=parseInt(valorRange.value); const parcelas=parcelasSelect.value; const valParc=tabela[valor]?.[parcelas]||0; parcelaValor.textContent='R$ '+valParc.toLocaleString('pt-BR',{minimumFractionDigits:2}); }
+valorRange.addEventListener('input',()=>{atualizarParcelas(); atualizarValor();});
+parcelasSelect.addEventListener('change', atualizarValor);
 
-  autoTab.addEventListener('click',()=>{ tipo='auto'; tabela=tabelaAuto; autoTab.classList.add('active'); imovelTab.classList.remove('active'); investTab.classList.remove('active'); valorRange.min=10000; valorRange.max=200000; valorRange.step=10000; valorRange.value=10000; atualizarParcelas(); atualizarValor(); });
-  imovelTab.addEventListener('click',()=>{ tipo='imovel'; tabela=tabelaImovel; autoTab.classList.remove('active'); imovelTab.classList.add('active'); investTab.classList.remove('active'); valorRange.min=50000; valorRange.max=600000; valorRange.step=50000; valorRange.value=50000; atualizarParcelas(); atualizarValor(); });
-  investTab.addEventListener('click',()=>{ tipo='invest'; tabela=tabelaInvest; autoTab.classList.remove('active'); imovelTab.classList.remove('active'); investTab.classList.add('active'); valorRange.min=10000; valorRange.max=200000; valorRange.step=10000; valorRange.value=10000; atualizarParcelas(); atualizarValor(); });
+autoTab.addEventListener('click',()=>{ tipo='auto'; tabela=tabelaAuto; autoTab.classList.add('active'); imovelTab.classList.remove('active'); investTab.classList.remove('active'); valorRange.min=10000; valorRange.max=200000; valorRange.step=10000; valorRange.value=10000; atualizarParcelas(); atualizarValor(); });
+imovelTab.addEventListener('click',()=>{ tipo='imovel'; tabela=tabelaImovel; autoTab.classList.remove('active'); imovelTab.classList.add('active'); investTab.classList.remove('active'); valorRange.min=50000; valorRange.max=600000; valorRange.step=50000; valorRange.value=50000; atualizarParcelas(); atualizarValor(); });
+investTab.addEventListener('click',()=>{ tipo='invest'; tabela=tabelaInvest; autoTab.classList.remove('active'); imovelTab.classList.remove('active'); investTab.classList.add('active'); valorRange.min=10000; valorRange.max=200000; valorRange.step=10000; valorRange.value=10000; atualizarParcelas(); atualizarValor(); });
 
-  whatsBtn.addEventListener('click',()=>{
-    const valor=parseInt(valorRange.value).toLocaleString('pt-BR');
-    const parcelas=parcelasSelect.value;
-    const valParc=parcelaValor.textContent;
-    const msg=encodeURIComponent(`Olá! Gostaria de simular um consórcio de ${tipo==='auto'?'automóvel':tipo==='imovel'?'imóvel':'investimento'}.\nValor total: R$ ${valor}\nParcela estimada: ${valParc}\nQuantidade: ${parcelas}x`);
-    const num='554598486848';
-    window.open(`https://wa.me/${num}?text=${msg}`,'_blank');
-  });
+whatsBtn.addEventListener('click',()=>{
+  const valor=parseInt(valorRange.value).toLocaleString('pt-BR');
+  const parcelas=parcelasSelect.value;
+  const valParc=parcelaValor.textContent;
+  const msg=encodeURIComponent(`Olá! Gostaria de simular um consórcio de ${tipo==='auto'?'automóvel':tipo==='imovel'?'imóvel':'investimento'}.\nValor total: R$ ${valor}\nParcela estimada: ${valParc}\nQuantidade: ${parcelas}x`);
+  const num='554598486848';
+  window.open(`https://wa.me/${num}?text=${msg}`,'_blank');
+});
 
-  atualizarParcelas(); atualizarValor();
+atualizarParcelas(); atualizarValor();
 
-  // CARROSSEL ARRASTÁVEL COM INDICADORES
-  const track=document.getElementById('carousel-track');
-  const slides=document.querySelectorAll('.carousel-slide');
-  const indicators=document.querySelectorAll('.carousel-indicators span');
-  let index=0;
-  let startX=0, currentX=0, dragging=false;
+// CARROSSEL ARRASTÁVEL COM PONTINHOS CLICÁVEIS E ANIMAÇÃO SUAVE
+const track=document.getElementById('carousel-track');
+const slides=document.querySelectorAll('.carousel-slide');
+const indicators=document.querySelectorAll('.carousel-indicators span');
+let index=0, startX=0, currentX=0, dragging=false;
 
-  function setSlide(i){
-    index=Math.min(Math.max(i,0),slides.length-1);
-    track.style.transform=`translateX(-${index*100}%)`;
-    indicators.forEach((dot,d)=>dot.classList.toggle('active', d===index));
-  }
+function setSlide(i){
+  index=Math.min(Math.max(i,0),slides.length-1);
+  track.style.transition='transform 0.3s ease';
+  track.style.transform=`translateX(-${index*100}%)`;
+  indicators.forEach((dot,d)=>dot.classList.toggle('active', d===index));
+}
 
-  track.addEventListener('mousedown', e=>{ dragging=true; startX=e.clientX; track.classList.add('grabbing'); });
-  track.addEventListener('mouseup', e=>{ dragging=false; track.classList.remove('grabbing'); if(Math.abs(currentX)>50){ if(currentX<0) setSlide(index+1); else setSlide(index-1); } currentX=0; });
-  track.addEventListener('mouseleave', e=>{ if(dragging){ dragging=false; track.classList.remove('grabbing'); if(Math.abs(currentX)>50){ if(currentX<0) setSlide(index+1); else setSlide(index-1); } currentX=0; } });
-  track.addEventListener('mousemove', e=>{ if(!dragging) return; currentX=e.clientX-startX; });
+function updateDragProgress(){
+  if(!dragging) return;
+  const progress = Math.min(Math.max(-currentX/track.clientWidth, -1), 1);
+  const tempIndex = Math.min(Math.max(index+progress,0), slides.length-1);
+  indicators.forEach((dot,d)=>dot.classList.toggle('active', d===Math.round(tempIndex)));
+}
 
-  track.addEventListener('touchstart', e=>{ dragging=true; startX=e.touches[0].clientX; });
-  track.addEventListener('touchend', e=>{ dragging=false; if(Math.abs(currentX)>50){ if(currentX<0) setSlide(index+1); else setSlide(index-1); } currentX=0; });
-  track.addEventListener('touchmove', e=>{ if(!dragging) return; currentX=e.touches[0].clientX-startX; });
+// Mouse events
+track.addEventListener('mousedown', e=>{ dragging=true; startX=e.clientX; track.classList.add('grabbing'); track.style.transition='none'; });
+track.addEventListener('mousemove', e=>{ if(!dragging) return; currentX=e.clientX-startX; track.style.transform=`translateX(-${index*100 - (currentX/track.clientWidth)*100}%)`; updateDragProgress(); });
+track.addEventListener('mouseup', e=>{ dragging=false; track.classList.remove('grabbing'); if(Math.abs(currentX)>50){ if(currentX<0) setSlide(index+1); else setSlide(index-1); } else setSlide(index); currentX=0; });
+track.addEventListener('mouseleave', e=>{ if(dragging){ dragging=false; track.classList.remove('grabbing'); if(Math.abs(currentX)>50){ if(currentX<0) setSlide(index+1); else setSlide(index-1); } else setSlide(index); currentX=0; } });
 
-  window.addEventListener('resize', ()=>{ setSlide(index); });
+// Touch events
+track.addEventListener('touchstart', e=>{ dragging=true; startX=e.touches[0].clientX; track.style.transition='none'; });
+track.addEventListener('touchmove', e=>{ if(!dragging) return; currentX=e.touches[0].clientX-startX; track.style.transform=`translateX(-${index*100 - (currentX/track.clientWidth)*100}%)`; updateDragProgress(); });
+track.addEventListener('touchend', e=>{ dragging=false; if(Math.abs(currentX)>50){ if(currentX<0) setSlide(index+1); else setSlide(index-1); } else setSlide(index); currentX=0; });
+
+// Pontinhos clicáveis
+indicators.forEach((dot,i)=>{ dot.addEventListener('click', ()=>{ setSlide(i); }); });
+
+window.addEventListener('resize', ()=>{ setSlide(index); });
 </script>
 </body>
 </html>
