@@ -150,7 +150,7 @@
     }
 
     .floating-btn:hover {
-      background: var(--accent-dark);
+      background-color: var(--accent-dark);
     }
 
     .portfolio {
@@ -178,6 +178,7 @@
       position: relative;
       width: 100%;
       padding-top: 100%; /* 1:1 ratio */
+      overflow: hidden;
     }
 
     .carousel-container {
@@ -186,9 +187,6 @@
       left: 0;
       width: 100%;
       height: 100%;
-      overflow: hidden;
-      border-radius: 12px;
-      box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
     }
 
     .carousel-track {
@@ -203,24 +201,28 @@
       object-fit: cover;
     }
 
+    /* Botões fora do box */
     .carousel-btn {
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background-color: rgba(0,0,0,0.5);
-      color: white;
+      background-color: rgba(212,175,55,0.8);
+      color: #000;
       border: none;
-      padding: 10px;
+      padding: 12px;
       cursor: pointer;
       font-size: 24px;
       z-index: 10;
       border-radius: 50%;
     }
 
-    .carousel-btn.prev { left: 10px; }
-    .carousel-btn.next { right: 10px; }
-    .carousel-btn:hover { background-color: rgba(0,0,0,0.7); }
+    /* Um botão à esquerda, outro à direita do box */
+    .carousel-btn.prev { left: -50px; }
+    .carousel-btn.next { right: -50px; }
 
+    .carousel-btn:hover {
+      background-color: rgba(212,175,55,1);
+    }
   </style>
 </head>
 <body>
@@ -255,7 +257,6 @@
     <!-- CARROSSEL FUNCIONAL -->
     <div class="portfolio-box" id="carousel-box">
       <div class="carousel-container">
-        <button class="carousel-btn prev">&#10094;</button>
         <div class="carousel-track">
           <img src="1.jpg" class="carousel-slide" alt="Imagem 1">
           <img src="2.jpg" class="carousel-slide" alt="Imagem 2">
@@ -264,8 +265,10 @@
           <img src="5.jpg" class="carousel-slide" alt="Imagem 5">
           <img src="6.jpg" class="carousel-slide" alt="Imagem 6">
         </div>
-        <button class="carousel-btn next">&#10095;</button>
       </div>
+      <!-- Botões fora do box -->
+      <button class="carousel-btn prev">&#10094;</button>
+      <button class="carousel-btn next">&#10095;</button>
     </div>
   </div>
 
@@ -369,7 +372,6 @@
     });
 
     window.addEventListener('resize', updateCarousel);
-
   </script>
 </body>
 </html>
