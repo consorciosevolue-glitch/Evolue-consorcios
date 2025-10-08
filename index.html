@@ -177,9 +177,10 @@
     #carousel-box {
       position: relative;
       width: 100%;
-      aspect-ratio: 1/1; /* quadrado igual feed do Instagram */
+      max-width: 400px; /* largura do quadrado */
+      aspect-ratio: 1/1; /* força quadrado perfeito */
       overflow: hidden;
-      border-radius: 12px;
+      margin: 0 auto;
     }
 
     .carousel-container {
@@ -210,13 +211,12 @@
       padding: 10px;
       cursor: pointer;
       font-size: 24px;
-      border-radius: 50%;
       z-index: 10;
+      border-radius: 50%;
     }
 
-    .carousel-btn.prev { left: 10px; }
-    .carousel-btn.next { right: 10px; }
-
+    .carousel-btn.prev { left: 5px; top: 50%; transform: translateY(-50%); }
+    .carousel-btn.next { right: 5px; top: 50%; transform: translateY(-50%); }
     .carousel-btn:hover { background-color: rgba(0,0,0,0.7); }
 
   </style>
@@ -253,6 +253,7 @@
     <!-- CARROSSEL -->
     <div class="portfolio-box" id="carousel-box">
       <div class="carousel-container">
+        <button class="carousel-btn prev">&#10094;</button>
         <div class="carousel-track">
           <img src="1.jpg" class="carousel-slide" alt="Imagem 1">
           <img src="2.jpg" class="carousel-slide" alt="Imagem 2">
@@ -261,7 +262,6 @@
           <img src="5.jpg" class="carousel-slide" alt="Imagem 5">
           <img src="6.jpg" class="carousel-slide" alt="Imagem 6">
         </div>
-        <button class="carousel-btn prev">&#10094;</button>
         <button class="carousel-btn next">&#10095;</button>
       </div>
     </div>
