@@ -291,13 +291,26 @@ function endDrag(){
   if(!dragging) return;
   dragging=false;
   carouselTrack.classList.remove('grabbing');
+
   if(currentX < -carouselTrack.clientWidth/4) index++;
   else if(currentX > carouselTrack.clientWidth/4) index--;
+  
   currentX=0;
   carouselTrack.style.transition='transform 0.3s ease';
   carouselTrack.style.transform=`translateX(-${index*100}%)`;
 }
 
+// Eventos aplicados no document, não só no track
+document.addEventListener('mousemove', e=>moveDrag(e.clientX));
+document.addEventListener('mouseup', endDrag);
+document.addEventListener('touchmove', e=>{
+  moveDrag(e.touches[0].clientX);
+  e.preventDefault(); // evita scroll da página
+});
+document.addEventListener('touchend', endDrag);
+
+carouselTrack.addEventListener('mousedown', e=>startDrag(e.clientX));
+carouselTrack.addEventListener('touchstart', e=>startDrag(e.touches[0].clientX));
 // ------------------------------
  // Loop infinito
 // ------------------------------
