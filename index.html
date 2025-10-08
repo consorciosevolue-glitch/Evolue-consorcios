@@ -177,14 +177,18 @@
     #carousel-box {
       position: relative;
       width: 100%;
-      overflow: hidden;
-      height: 300px;
+      padding-top: 100%; /* 1:1 ratio */
     }
 
     .carousel-container {
-      position: relative;
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.15);
     }
 
     .carousel-track {
