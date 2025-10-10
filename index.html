@@ -275,9 +275,47 @@ function atualizarValor(){
 valorRange.addEventListener('input',()=>{atualizarParcelas(); atualizarValor();});
 parcelasSelect.addEventListener('change', atualizarValor);
 
-autoTab.addEventListener('click',()=>{ tipo='auto'; tabela=tabelaAuto; autoTab.classList.add('active'); imovelTab.classList.remove('active'); investTab.classList.remove('active'); valorRange.min=10000; valorRange.max=200000; valorRange.step=10000; valorRange.value=10000; atualizarParcelas(); atualizarValor(); });
-imovelTab.addEventListener('click',()=>{ tipo='imovel'; tabela=tabelaImovel; autoTab.classList.remove('active'); imovelTab.classList.add('active'); investTab.classList.remove('active'); valorRange.min=50000; valorRange.max=600000; valorRange.step=50000; valorRange.value=50000; atualizarParcelas(); atualizarValor(); });
-investTab.addEventListener('click',()=>{ tipo='invest'; tabela=tabelaInvest; autoTab.classList.remove('active'); imovelTab.classList.remove('active'); investTab.classList.add('active'); valorRange.min=10000; valorRange.max=200000; valorRange.step=10000; valorRange.value=10000; atualizarParcelas(); atualizarValor(); });
+autoTab.addEventListener('click',()=>{
+  tipo='auto';
+  tabela=tabelaAuto;
+  autoTab.classList.add('active');
+  imovelTab.classList.remove('active');
+  investTab.classList.remove('active');
+  valorRange.min=10000;
+  valorRange.max=200000;
+  valorRange.step=10000;
+  valorRange.value=10000;
+  atualizarParcelas();
+  atualizarValor();
+});
+
+imovelTab.addEventListener('click',()=>{
+  tipo='imovel';
+  tabela=tabelaImovel;
+  autoTab.classList.remove('active');
+  imovelTab.classList.add('active');
+  investTab.classList.remove('active');
+  valorRange.min=50000;
+  valorRange.max=600000;
+  valorRange.step=50000;
+  valorRange.value=50000;
+  atualizarParcelas();
+  atualizarValor();
+});
+
+investTab.addEventListener('click',()=>{
+  tipo='invest';
+  tabela=tabelaInvest;
+  autoTab.classList.remove('active');
+  imovelTab.classList.remove('active');
+  investTab.classList.add('active');
+  valorRange.min=7000;      // valor mínimo real da tabela
+  valorRange.max=30000;     // corrigido — antes estava 200000
+  valorRange.step=1000;      // opcional: passo menor pra mais precisão (pode deixar 1000 ou 5000 se preferir)
+  valorRange.value=7000;    // começa no menor valor disponível
+  atualizarParcelas();
+  atualizarValor();
+});
 
 whatsBtn.addEventListener('click',()=>{
   const valor=parseInt(valorRange.value).toLocaleString('pt-BR');
